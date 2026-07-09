@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  //output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Driver {
+  id Int @id @default(autoincrement())
+  name String
+  number Int
+  teamId Int
+  team Team @relation (fields: [teamId], references: [id])
+  results Result[]
+}
+
+model Team {
+  id Int @id @default(autoincrement())
+  name String
+  drivers Driver[]
+  cars Car[]
+  results Result[]
+}
+
+enum CircuitType {
+  STREET
+  PERMANENT
+}
+
+model Car {
+  id Int @id @default(autoincrement())
+  chassisName  String
+  engineSupplier String
+  power Float
+  weight Float
+  season       Int     
+  teamId       Int
+  team         Team     @relation(fields: [teamId], references: [id])
+}
+
+model Race {
+  id Int @id @default(autoincrement())
+  name String
+  circuitType CircuitType
+  length Float
+  laps Int
+  season Int
+  date DateTime
+  country String
+  results Result[]
+}
+
+model Result {
+  id         Int      @id @default(autoincrement())
+  position   Int   
+  points     Float    
+  laps       Int     
+  status     String   
+  raceId     Int
+  race       Race     @relation(fields: [raceId], references: [id])
+  driverId   Int
+  driver     Driver   @relation(fields: [driverId], references: [id])
+  teamId     Int
+  team       Team     @relation(fields: [teamId], references: [id])
+}
