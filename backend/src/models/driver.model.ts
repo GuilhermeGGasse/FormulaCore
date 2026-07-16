@@ -18,5 +18,8 @@ export const driverModel = {
     data
   }),
 
-
+  delete: (id:number) =>
+  {
+     prisma.driver.delete({where: {id}})
+  }
 };

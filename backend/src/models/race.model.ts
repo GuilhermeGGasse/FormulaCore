@@ -63,6 +63,6 @@ export const raceModel = {
     },
 
     delete: (id: number) =>
-      prisma.race.findUnique({where: {id}}),
+      prisma.race.delete({where: {id}}),
     
 }

@@ -6,14 +6,21 @@ import { teams } from "./teams.js";
 
 const server = fastify({ logger: true });
 
-server.listen({ port: 3333 }, () => {
-    console.log("Server is running on http://localhost:3333");
-});
-
 server.register(cors, {
     origin: "*",
     //methods:["GET", "POST"]
 })
+
+server.listen({ port: 3333 }, () => {
+    console.log("Server is running on http://localhost:3333");
+});
+
+server.get("/", async (request, response) => {
+  response.send({
+    message: "FormulaCore is running",
+    status: "ok",
+  });
+});
 
 server.get("/teams", async (request, response) => {
     response.type("application/json").code(200);
