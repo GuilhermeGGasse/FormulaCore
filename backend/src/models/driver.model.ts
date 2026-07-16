@@ -6,6 +6,11 @@ export const driverModel = {
 
   findById: (id: number) => prisma.driver.findUnique({ where: { id } }),
 
+  findByTeam: (teamId:number) =>
+  {
+    return prisma.driver.findMany({where: {teamId}})
+  },
+
   create: (data: { name: string; number: number; teamId: number }) =>
     prisma.driver.create({ data }),
 

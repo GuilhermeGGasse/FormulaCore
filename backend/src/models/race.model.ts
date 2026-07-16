@@ -7,7 +7,6 @@ export const raceModel = {
             results: true,
         },
     }),
-
     findById: (id: number) =>
         prisma.race.findUnique(
             {
@@ -24,25 +23,25 @@ export const raceModel = {
             }
         ),
 
-    findByFilters: (season: number, country: string) => {
-        const data: { season?: number, country?: string } = {};
+    findByName: (name: string) =>
+        prisma.race.findMany({
+            where: { name }
+        }),
 
+    findByFilters: (season?: number, country?: string) => {
+        const data: { season?: number, country?: string } = {};
         if (season !== undefined) {
             data.season = season;
         }
-
         if (country !== undefined) {
             data.country = country;
         }
-
         return prisma.race.findMany({ where: data });
     },
-
     findByCircuitType: (circuitType: CircuitType) => {
-
         return prisma.race.findMany(
             {
-                where: {circuitType},
+                where: { circuitType },
                 include:
                 {
                     name: true,
@@ -53,16 +52,12 @@ export const raceModel = {
             }
         );
     },
-
     //findlatest
     //findnext
-
-    update: (id: number, data: {name:string, date:Date, season:number}) =>
-    {
-        return prisma.race.update({where: {id}, data})
+    update: (id: number, data: { name: string, date: Date, season: number }) => {
+        return prisma.race.update({ where: { id }, data })
     },
-
     delete: (id: number) =>
-      prisma.race.delete({where: {id}}),
-    
+        prisma.race.delete({ where: { id } }),
+
 }

@@ -18,6 +18,13 @@ export const teamModel = {
       },
     }),
 
+  findByName: (name: string) =>
+    prisma.team.findMany({
+      where: {name}
+      
+    }),
+  /*Preciso verificar se a validação de criar um time 
+  com nome existente é feita no model ou no service.*/
   create: (data: { name: string }) =>
     prisma.team.create({ data }),
 

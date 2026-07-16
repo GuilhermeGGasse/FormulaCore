@@ -5,6 +5,11 @@ export const carModel = {
 
     findById: (id: number) => prisma.car.findUnique({ where: { id } }),
 
+    findByTeam: (teamId: number) => 
+        {
+        return prisma.driver.findMany({ where: { teamId } })
+    },
+
     create: (data: { chassisName: string; engineSupplier: string; power: number; weight: number; teamId: number, season: number }) =>
         prisma.car.create({ data }),
 
