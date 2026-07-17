@@ -9,7 +9,23 @@ export const carModel = {
         {
         return prisma.driver.findMany({ where: { teamId } })
     },
+    findByFilters: (engineSupplier?: string, season?: number, teamId?: number) => {
+        const data: { engineSupplier?: string, season?: number, teamId?: number} = {};
 
+        if (engineSupplier !== undefined) {
+            data.engineSupplier = engineSupplier;
+        }
+
+        if (season !== undefined) {
+            data.season = season;
+        }
+
+        if (teamId !== undefined) {
+            data.teamId = teamId;
+        }
+
+        return prisma.car.findMany({ where: data });
+    },
     create: (data: { chassisName: string; engineSupplier: string; power: number; weight: number; teamId: number, season: number }) =>
         prisma.car.create({ data }),
 

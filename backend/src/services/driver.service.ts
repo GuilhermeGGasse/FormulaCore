@@ -22,19 +22,21 @@ export const driverService =
         }
         return driverModel.create(data);
     },
-    updateDriver: async (id: number, data: { name: string, number: number, teamId: number }) => {
+    updateDriver: async (id: number, data: { name?: string, number?: number, teamId?: number }) => {
         const driver = await driverModel.findById(id);
         if (!driver) {
             throw new Error("Driver not found.");
         }
-        const team = await teamModel.findById(data.teamId);
-        if (!team) {
-            throw new Error("Team not found.");
+        if (data.teamId !== undefined) {
+            const team = await teamModel.findById(data.teamId);
+            if (!team) {
+                throw new Error("Team not found.");
+            }
         }
         if (data.name == undefined && data.number == undefined && data.teamId == undefined) {
-            throw new Error("None argument passed.");
+            throw new Error("None field passed.");
         }
-        if (data.number <= 0) {
+        if (data.number !== undefined && data.number <= 0) {
             throw new Error("Number must have positive value.");
         }
         //Ainda falta um if = se há algum outro motorista com este número.

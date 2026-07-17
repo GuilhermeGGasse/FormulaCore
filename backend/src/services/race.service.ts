@@ -36,18 +36,25 @@ export const raceService =
         }
         return races;
     },
-    updateRace: async (id: number, data: { name: string, length: number, laps: number, season: number, date: Date, country: string }) => {
+    createRace: () =>
+    {
+        //return raceModel.create(data);
+    },
+    updateRace: async (id: number, data: { name?: string, length?: number, laps?: number, season?: number, date?: Date, country?: string }) => {
         const race = await raceModel.findById(id);
         if (!race) {
             throw new Error("Race not found.");
         }
-        const raceName = await raceModel.findByName(data.name);
-        if (raceName) {
-            throw new Error("Race already exists.");
-        }
         if (data.name == undefined && data.length == undefined && data.laps == undefined && data.season == undefined && data.date == undefined && data.country == undefined) {
-            throw new Error("None argument passed.");
+            throw new Error("None field passed.");
         }
+        if (data.name !== undefined) {
+            const raceName = await raceModel.findByName(data.name);
+            if (raceName) {
+                throw new Error("Race already exists.");
+            }
+        }
+
         return raceModel.update(id, data);
     },
     deleteRace: async (id: number) => {

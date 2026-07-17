@@ -26,21 +26,21 @@ export const resultModel = {
         )
     },
 
-    findByFilters: (driverId?: number, teamId?: number, season?: number) => {
-        const data: { driverId?: number, teamId?: number, race?: {season: number} } = {};
-
+    findByFilters: (driverId?: number, teamId?: number, season?: number, raceId?: number) => {
+        const data: { driverId?: number, teamId?: number, race?: {season: number}, raceId?:number } = {};
         if (driverId !== undefined) {
             data.driverId = driverId;
         }
-
         if (teamId !== undefined) {
             data.teamId = teamId;
         }
-
         if (season !== undefined) {
             data.race = {season};
         }
-
+        if(raceId !== undefined)
+        {
+            data.raceId = raceId;
+        }
         return prisma.result.findMany({ where: data });
     },
 
@@ -49,7 +49,7 @@ export const resultModel = {
         return prisma.result.create({ data })
     },
 
-    update: (id: number, data: { position: number, date: Date }) => {
+    update: (id: number, data: {position?: number, points?: number, laps?: number, status?: string}) => {
         return prisma.result.update({ where: { id }, data })
     },
     

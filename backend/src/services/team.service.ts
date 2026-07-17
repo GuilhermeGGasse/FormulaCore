@@ -33,7 +33,7 @@ export const teamService =
             throw new Error("Team already exists.");
         }
         if (data == undefined) {
-            throw new Error("None argument passed.");
+            throw new Error("None field passed.");
         }
         return teamModel.update(id, data);
     },
