@@ -52,6 +52,9 @@ export const raceModel = {
             }
         );
     },
+    create: (data: { name: string, circuitType: CircuitType, length: number, laps: number, season: number, date: Date, country: string }) => {
+        return prisma.race.create({ data });
+    },
     //findlatest
     //findnext
     update: (id: number, data: { name?: string, date?: Date, season?: number }) => {

@@ -4,7 +4,11 @@ import fastify from "fastify";
 import cors from "@fastify/cors";
 import { teams } from "./teams.js";
 
+import { registerErrorHandler } from "./errors/errorHandler.js";
+
 const server = fastify({ logger: true });
+
+registerErrorHandler(server);
 
 server.register(cors, {
     origin: "*",
