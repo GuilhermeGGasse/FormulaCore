@@ -1,6 +1,7 @@
 import { driverModel } from "../models/driver.model.js"
 import { teamModel } from "../models/team.model.js";
 import { resultModel } from "../models/result.model.js";
+import { NotFoundError } from "../errors/NotFoundError.js";
 
 export const driverService =
 {
@@ -11,33 +12,33 @@ export const driverService =
     getDriverById: async (id: number) => {
         const driver = await driverModel.findById(id);
         if (!driver) {
-            throw new Error("Driver not found.");
+            throw new NotFoundError("Driver not found.");
         }
         return driver;
     },
     createDriver: async (data: { name: string, number: number, teamId: number }) => {
         const team = await teamModel.findById(data.teamId);
         if (!team) {
-            throw new Error("Team not found.");
+            throw new NotFoundError("Team not found.");
         }
         return driverModel.create(data);
     },
     updateDriver: async (id: number, data: { name?: string, number?: number, teamId?: number }) => {
         const driver = await driverModel.findById(id);
         if (!driver) {
-            throw new Error("Driver not found.");
+            throw new NotFoundError("Driver not found.");
         }
         if (data.teamId !== undefined) {
             const team = await teamModel.findById(data.teamId);
             if (!team) {
-                throw new Error("Team not found.");
+                throw new NotFoundError("Team not found.");
             }
         }
         if (data.name == undefined && data.number == undefined && data.teamId == undefined) {
-            throw new Error("None field passed.");
+            throw new NotFoundError("None field passed.");
         }
         if (data.number !== undefined && data.number <= 0) {
-            throw new Error("Number must have positive value.");
+            throw new NotFoundError("Number must have positive value.");
         }
         //Ainda falta um if = se há algum outro motorista com este número.
 
@@ -46,11 +47,11 @@ export const driverService =
     deleteDriver: async (id: number) => {
         const driver = await driverModel.findById(id);
         if (!driver) {
-            throw new Error("Driver not found.");
+            throw new NotFoundError("Driver not found.");
         }
         const resultsperDriver = await resultModel.findByFilters(id)
         if (resultsperDriver.length > 0) {
-            throw new Error("Cannot delete a driver with existing results.");
+            throw new NotFoundError("Cannot delete a driver with existing results.");
         }
         return driverModel.delete(id);
     }
