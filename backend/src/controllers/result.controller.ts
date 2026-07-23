@@ -2,25 +2,25 @@ import type { FastifyReply, FastifyRequest } from "fastify";
 import { resultService } from "../services/result.service.js";
 //utiliza driver, race e team
 
-export class ResultController {
-    async getAllResults(
+export const ResultController = {
+    getAllResults: async (
         request: FastifyRequest,
         reply: FastifyReply
-    ) {
+    ) => {
         const results = resultService.getAllResults();
         return reply.status(200).send(results);
-    }
-    async getResultById(request: FastifyRequest<{
+    },
+    getResultById: async (request: FastifyRequest<{
         Params: {
             id: number;
         };
     }>,
-        reply: FastifyReply) {
+        reply: FastifyReply) => {
         const { id } = request.params;
         const result = await resultService.getResultById(id);
         return reply.status(200).send(result);
-    }
-    async createResult(request: FastifyRequest<{
+    },
+    createResult: async (request: FastifyRequest<{
         Body: {
             position: number,
             points: number,
@@ -30,7 +30,7 @@ export class ResultController {
             driverId: number,
             teamId: number
         };
-    }>, reply: FastifyReply) {
+    }>, reply: FastifyReply) => {
         const { position, points, laps, status, raceId, driverId, teamId } = request.body;
         const result = await resultService.createResult(
             {
@@ -44,8 +44,8 @@ export class ResultController {
             }
         )
         return reply.status(201).send(result);
-    }
-    async updateResult(request: FastifyRequest<{
+    },//Precisa adicionar possibilidade de mudança para teamId, driverId e raceId com suas validações.
+    updateResult: async (request: FastifyRequest<{
         Params: {
             id: number;
         };
@@ -58,7 +58,7 @@ export class ResultController {
             driverId: number,
             teamId: number
         };
-    }>, reply: FastifyReply) {
+    }>, reply: FastifyReply) => {
         const { id } = request.params;
         const { position, points, laps, status, raceId, driverId, teamId } = request.body;
         const result = await resultService.updateResult(id,
@@ -70,13 +70,13 @@ export class ResultController {
             }
         )
         return reply.status(200).send(result);
-    }
-    async deleteResult(request: FastifyRequest<{
+    },
+    deleteResult: async (request: FastifyRequest<{
         Params: {
             id: number;
         };
     }>,
-        reply: FastifyReply) {
+        reply: FastifyReply) => {
         const { id } = request.params;
         await resultService.deleteResult(id);
         return reply.status(204).send();

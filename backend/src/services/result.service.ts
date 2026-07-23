@@ -71,7 +71,7 @@ export const resultService = {
             throw new Error("Result already exists.");
         }
         return resultModel.create(data);
-    },
+    },//Precisa adicionar possibilidade de mudança para teamId, driverId e raceId com suas validações.
     updateResult: async (id: number, data: { position?: number, points?: number, laps?: number, status?: string }) => {
         const result = await resultModel.findById(id);
         if (!result) {

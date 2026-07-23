@@ -1,39 +1,39 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { teamService } from "../services/team.service.js";
 
-export class TeamController {
-    async getAllTeams(
+export const TeamController = {
+    getAllTeams: async (
         request: FastifyRequest,
         reply: FastifyReply
-    ) {
+    ) => {
         const teams = teamService.getallTeams();
         return reply.status(200).send(teams);
-    }
-    async getTeamById(
+    },
+    getTeamById: async (
         request: FastifyRequest<{
             Params: {
                 id: number;
             };
         }>,
         reply: FastifyReply
-    ) {
+    ) => {
         const { id } = request.params;
         const team = await teamService.getTeamById(id);
         return reply.status(200).send(team);
-    }
-    async createTeam(request: FastifyRequest<{
+    },
+    createTeam: async (request: FastifyRequest<{
         Body: {
             name: string;
         };
-    }>, reply: FastifyReply) {
+    }>, reply: FastifyReply) => {
         const { name } = request.body;
 
         const team = await teamService.createTeam({
             name,
         });
         return reply.status(201).send(team);
-    }
-    async updateTeam(
+    },
+    updateTeam: async (
         request: FastifyRequest<{
             Params: {
                 id: number;
@@ -43,7 +43,7 @@ export class TeamController {
             };
         }>,
         reply: FastifyReply
-    ) {
+    ) => {
 
         const { id } = request.params;
         const { name } = request.body;
@@ -59,15 +59,15 @@ export class TeamController {
             return reply.status(200).send(team);
         }
 
-    }
-    async deleteTeam(
+    },
+    deleteTeam: async (
         request: FastifyRequest<{
             Params: {
                 id: number;
             };
         }>,
         reply: FastifyReply
-    ) {
+    ) => {
         const { id } = request.params;
 
         await teamService.deleteTeam(id);

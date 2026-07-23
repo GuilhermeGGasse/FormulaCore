@@ -1,57 +1,57 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { carService } from "../services/car.service.js";
 
-export class CarController {
-    async getAllCars(
+export const CarController = {
+    getAllCars: async (
         request: FastifyRequest,
         reply: FastifyReply
-    ) {
+    ) => {
         const cars = carService.getAllCars();
         return reply.status(200).send(cars);
-    }
-    async getCarById(
+    },
+    getCarById: async (
         request: FastifyRequest<{
             Params: {
                 id: number;
             };
         }>,
         reply: FastifyReply
-    ) {
+    ) => {
         const { id } = request.params;
         const car = await carService.getCarById(id);
         return reply.status(200).send(car);
-    }
-    async getCarsByEngine(request: FastifyRequest<{
+    },
+    getCarsByEngine: async (request: FastifyRequest<{
         Params: {
             engineSupplier: string;
         };
     }>,
-        reply: FastifyReply) {
+        reply: FastifyReply) => {
         const { engineSupplier } = request.params;
         const cars = await carService.getCarsByEngine(engineSupplier);
         return reply.status(200).send(cars);
-    }
-    async getCarsBySeason(request: FastifyRequest<{
+    },
+    getCarsBySeason: async (request: FastifyRequest<{
         Params: {
             season: number;
         };
     }>,
-        reply: FastifyReply) {
+        reply: FastifyReply) => {
         const { season } = request.params;
         const cars = await carService.getCarsBySeason(season);
         return reply.status(200).send(cars);
-    }
-    async getCarsByTeam(request: FastifyRequest<{
+    },
+    getCarsByTeam: async (request: FastifyRequest<{
         Params: {
             teamId: number;
         };
     }>,
-        reply: FastifyReply) {
+        reply: FastifyReply) => {
         const { teamId } = request.params;
         const cars = await carService.getCarsByTeam(teamId);
         return reply.status(200).send(cars);
-    }
-    async createCar(request: FastifyRequest<{
+    },
+    createCar: async (request: FastifyRequest<{
         Body: {
             chassisName: string,
             engineSupplier: string,
@@ -60,7 +60,7 @@ export class CarController {
             season: number,
             teamId: number
         };
-    }>, reply: FastifyReply) {
+    }>, reply: FastifyReply) => {
         const { chassisName, engineSupplier, power, weight, season, teamId } = request.body;
 
         const car = await carService.createCar({
@@ -72,8 +72,8 @@ export class CarController {
             teamId
         })
         return reply.status(201).send(car);
-    }
-    async updateCar(
+    },
+    updateCar: async (
         request: FastifyRequest<{
             Params: {
                 id: number;
@@ -87,7 +87,7 @@ export class CarController {
                 teamId: number
             };
         }>,
-        reply: FastifyReply) {
+        reply: FastifyReply) => {
         const { id } = request.params;
         const { chassisName, engineSupplier, power, weight, season, teamId } = request.body;
         const car = await carService.updateCar(
@@ -103,17 +103,17 @@ export class CarController {
             }
         );
         return reply.status(200).send(car);
+    },
+    deleteCar: async (
+        request: FastifyRequest<{
+            Params: {
+                id: number;
+            };
+        }>,
+        reply: FastifyReply
+    ) => {
+        const { id } = request.params;
+        await carService.deleteCar(id);
+        return reply.status(204).send();
     }
-    async deleteCar(
-            request: FastifyRequest<{
-                Params: {
-                    id: number;
-                };
-            }>,
-            reply: FastifyReply
-        ) {
-            const { id } = request.params;
-            await carService.deleteCar(id);
-            return reply.status(204).send();
-        }
 }
