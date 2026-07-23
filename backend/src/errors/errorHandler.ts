@@ -1,22 +1,13 @@
 import type { FastifyInstance } from "fastify";
+import { NotFoundError } from "../errors/NotFoundError.js";
 
 export function registerErrorHandler(fastify: FastifyInstance) {
-
     fastify.setErrorHandler((error, request, reply) => {
-        if (error instanceof Error) {
-            if (error.message === "DRIVER_NOT_FOUND") {
-                return reply.status(404).send({
-                    message: "Driver not found."
-                });
-            }
-            if (error.message === "DRIVER_HAS_RESULTS") {
-                return reply.status(409).send({
-                    message: "Cannot delete driver with existing results."
-                });
-            }
+        if (error instanceof NotFoundError) {
+            return reply.status(error.statusCode).send({ message: error.message });
         }
-        return reply.status(500).send({
-            message: "Internal server error."
-        });
+
+        return reply.status(500).send({ message: "Internal server error." });
     });
 }
+

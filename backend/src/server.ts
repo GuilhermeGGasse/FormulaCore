@@ -2,9 +2,11 @@ console.log("Hello, World!");
 
 import fastify from "fastify";
 import cors from "@fastify/cors";
+
 import { teams } from "./teams.js";
 
 import { registerErrorHandler } from "./errors/errorHandler.js";
+import { registerRoutes } from "./routes/index.js";
 
 const server = fastify({ logger: true });
 
@@ -14,6 +16,8 @@ server.register(cors, {
     origin: "*",
     //methods:["GET", "POST"]
 })
+
+registerRoutes(server);
 
 server.listen({ port: 3333 }, () => {
     console.log("Server is running on http://localhost:3333");
