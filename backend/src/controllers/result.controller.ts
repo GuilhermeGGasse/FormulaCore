@@ -24,21 +24,45 @@ export const ResultController = {
     //getResultByTeam
     //getResultsBySeason
     //getResultsByRace
-    getResultByDriver: async() => 
-    {
-
+    getResultsByDriver: async (request: FastifyRequest<{
+        Params: {
+            driverId: string;
+        };
+    }>,
+        reply: FastifyReply) => {
+        const { driverId } = request.params;
+        const results = await resultService.getResultsByDriver(Number(driverId));
+        return reply.status(200).send(results);
     },
-    getResultByTeam: async() => 
-    {
-
+    getResultsByTeam: async (request: FastifyRequest<{
+        Params: {
+            teamId: string;
+        };
+    }>,
+        reply: FastifyReply) => {
+        const { teamId } = request.params;
+        const results = await resultService.getResultsByTeam(Number(teamId));
+        return reply.status(200).send(results);
     },
-    getResultBySeason: async() => 
-    {
-
+    getResultsBySeason: async (request: FastifyRequest<{
+        Params: {
+            season: string;
+        };
+    }>,
+        reply: FastifyReply) => {
+        const { season } = request.params;
+        const results = await resultService.getResultsBySeason(Number(season));
+        return reply.status(200).send(results);
     },
-    getResultByRace: async() => 
-    {
-
+    getResultsByRace: async (request: FastifyRequest<{
+        Params: {
+            raceId: string;
+        };
+    }>,
+        reply: FastifyReply) => {
+        const { raceId } = request.params;
+        const results = await resultService.getResultsByRace(Number(raceId));
+        return reply.status(200).send(results);
     },
     createResult: async (request: FastifyRequest<{
         Body: {
