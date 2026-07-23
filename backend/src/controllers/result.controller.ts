@@ -20,6 +20,26 @@ export const ResultController = {
         const result = await resultService.getResultById(id);
         return reply.status(200).send(result);
     },
+    //getResultByDriver
+    //getResultByTeam
+    //getResultsBySeason
+    //getResultsByRace
+    getResultByDriver: async() => 
+    {
+
+    },
+    getResultByTeam: async() => 
+    {
+
+    },
+    getResultBySeason: async() => 
+    {
+
+    },
+    getResultByRace: async() => 
+    {
+
+    },
     createResult: async (request: FastifyRequest<{
         Body: {
             position: number,
