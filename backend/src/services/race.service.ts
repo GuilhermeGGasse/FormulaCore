@@ -36,16 +36,23 @@ export const raceService =
         }
         return races;
     },
-    createRace: () =>
-    {
-        //return raceModel.create(data);
+    createRace: async (data: {
+        name: string,
+        circuitType: CircuitType,
+        length: number,
+        laps: number,
+        season: number,
+        date: Date,
+        country: string
+    }) => {
+        return raceModel.create(data);
     },
-    updateRace: async (id: number, data: { name?: string, length?: number, laps?: number, season?: number, date?: Date, country?: string }) => {
+    updateRace: async (id: number, data: { name?: string, circuitType?: CircuitType, length?: number, laps?: number, season?: number, date?: Date, country?: string }) => {
         const race = await raceModel.findById(id);
         if (!race) {
             throw new Error("Race not found.");
         }
-        if (data.name == undefined && data.length == undefined && data.laps == undefined && data.season == undefined && data.date == undefined && data.country == undefined) {
+        if (data.name == undefined && data.circuitType == undefined && data.length == undefined && data.laps == undefined && data.season == undefined && data.date == undefined && data.country == undefined) {
             throw new Error("None field passed.");
         }
         if (data.name !== undefined) {

@@ -13,21 +13,21 @@ export const carService =
         }
         return car;
     },
-    getCarByEngine: async (enginesupply: string) => {
+    getCarsByEngine: async (enginesupply: string) => {
         const cars = await carModel.findByFilters(enginesupply);
         if (!cars) {
             throw new Error("cars not found.");
         }
         return cars;
     },
-    getCarBySeason: async (season: number) => {
+    getCarsBySeason: async (season: number) => {
         const cars = await carModel.findByFilters(undefined, season);
         if (!cars) {
             throw new Error("cars not found.");
         }
         return cars;
     },
-    getCarByTeam: async (teamId: number) => {
+    getCarsByTeam: async (teamId: number) => {
         const cars = await carModel.findByFilters(undefined, teamId);
         if (!cars) {
             throw new Error("cars not found.");
