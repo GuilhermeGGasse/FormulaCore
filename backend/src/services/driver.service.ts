@@ -2,6 +2,8 @@ import { driverModel } from "../models/driver.model.js"
 import { teamModel } from "../models/team.model.js";
 import { resultModel } from "../models/result.model.js";
 import { NotFoundError } from "../errors/NotFoundError.js";
+import { ConflictError } from "../errors/conflictError.js";
+import { ValidationError } from "../errors/validationError.js";
 
 export const driverService =
 {
@@ -35,10 +37,10 @@ export const driverService =
             }
         }
         if (data.name == undefined && data.number == undefined && data.teamId == undefined) {
-            throw new NotFoundError("None field passed.");
+            throw new ValidationError("None field passed.");
         }
         if (data.number !== undefined && data.number <= 0) {
-            throw new NotFoundError("Number must have positive value.");
+            throw new ValidationError("Number must have positive value.");
         }
         //Ainda falta um if = se há algum outro motorista com este número.
 
@@ -51,7 +53,7 @@ export const driverService =
         }
         const resultsperDriver = await resultModel.findByFilters(id)
         if (resultsperDriver.length > 0) {
-            throw new NotFoundError("Cannot delete a driver with existing results.");
+            throw new ConflictError("Cannot delete a driver with existing results.");
         }
         return driverModel.delete(id);
     }

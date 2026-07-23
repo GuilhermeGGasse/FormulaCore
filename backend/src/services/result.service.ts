@@ -3,6 +3,8 @@ import { raceModel } from "../models/race.model.js";
 import { resultModel } from "../models/result.model.js"
 import { teamModel } from "../models/team.model.js";
 import { NotFoundError } from "../errors/NotFoundError.js";
+import { ConflictError } from "../errors/conflictError.js";
+import { ValidationError } from "../errors/validationError.js";
 
 export const resultService = {
     getAllResults: () => {
@@ -62,14 +64,14 @@ export const resultService = {
             throw new NotFoundError("team not found.");
         }
         if (driver.teamId !== data.teamId) {
-            throw new NotFoundError("Driver does not belong to the specified team.");
+            throw new ConflictError("Driver does not belong to the specified team.");
         }
         if (data.position <= 0) {
-            throw new NotFoundError("Invalid value.");
+            throw new ValidationError("Invalid value.");
         }
         const result = await resultModel.findByFilters(data.driverId, data.raceId);
         if (result.length > 0) {
-            throw new NotFoundError("Result already exists.");
+            throw new ConflictError("Result already exists.");
         }
         return resultModel.create(data);
     },//Precisa adicionar possibilidade de mudança para teamId, driverId e raceId com suas validações.
@@ -79,7 +81,7 @@ export const resultService = {
             throw new NotFoundError("result not found.");
         }
         if (data.position == undefined && data.points == undefined && data.laps == undefined && data.status == undefined) {
-            throw new NotFoundError("None field passed.");
+            throw new ValidationError("None field passed.");
         }
         return resultModel.update(id, data);
     },

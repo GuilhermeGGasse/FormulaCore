@@ -2,6 +2,8 @@ import type { CircuitType } from "@prisma/client";
 import { raceModel } from "../models/race.model.js"
 import { resultModel } from "../models/result.model.js";
 import { NotFoundError } from "../errors/NotFoundError.js";
+import { ConflictError } from "../errors/conflictError.js";
+import { ValidationError } from "../errors/validationError.js";
 
 export const raceService =
 {
@@ -54,12 +56,12 @@ export const raceService =
             throw new NotFoundError("Race not found.");
         }
         if (data.name == undefined && data.circuitType == undefined && data.length == undefined && data.laps == undefined && data.season == undefined && data.date == undefined && data.country == undefined) {
-            throw new NotFoundError("None field passed.");
+            throw new ValidationError("None field passed.");
         }
         if (data.name !== undefined) {
             const raceName = await raceModel.findByName(data.name);
             if (raceName) {
-                throw new NotFoundError("Race already exists.");
+                throw new ConflictError("Race already exists.");
             }
         }
 
@@ -72,7 +74,7 @@ export const raceService =
         }
         const results = await resultModel.findByFilters(id);
         if (results.length > 0) {
-            throw new NotFoundError("Cannot delete a driver with existing results.");
+            throw new ConflictError("Cannot delete a driver with existing results.");
         }
         return raceModel.delete(id);
     }

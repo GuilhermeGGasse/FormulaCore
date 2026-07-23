@@ -2,6 +2,9 @@ import { carModel } from "../models/car.model.js";
 import { driverModel } from "../models/driver.model.js";
 import { resultModel } from "../models/result.model.js";
 import { teamModel } from "../models/team.model.js";
+import { ConflictError } from "../errors/conflictError.js";
+import { NotFoundError } from "../errors/NotFoundError.js";
+import { ValidationError } from "../errors/validationError.js";
 
 export const teamService =
 {
@@ -12,28 +15,28 @@ export const teamService =
     getTeamById: async (id: number) => {
         const team = teamModel.findById(id);
         if (!team) {
-            throw new Error("Team not found.");
+            throw new NotFoundError("Team not found.");
         }
         return team;
     },
     createTeam: async (data: { name: string }) => {
         const teamName = await teamModel.findByName(data.name);
         if (teamName) {
-            throw new Error("Team already exists.");
+            throw new ConflictError("Team already exists.");
         }
         return teamModel.create(data);
     },
     updateTeam: async (id: number, data: { name: string }) => {
         const team = await teamModel.findById(id);
         if (!team) {
-            throw new Error("Team not found.");
+            throw new NotFoundError("Team not found.");
         }
         const teamName = await teamModel.findByName(data.name);
         if (teamName) {
-            throw new Error("Team already exists.");
+            throw new ConflictError("Team already exists.");
         }
         if (data == undefined) {
-            throw new Error("None field passed.");
+            throw new ValidationError("None field passed.");
         }
         return teamModel.update(id, data);
     },
@@ -46,17 +49,17 @@ export const teamService =
         const results = await resultModel.findByFilters(id);
         if(results.length>0)
         {
-            throw new Error("Cannot delete a driver with existing results.");
+            throw new ConflictError("Cannot delete a driver with existing results.");
         }
         const drivers = await driverModel.findByTeam(id);
         if(drivers.length>0)
         {
-            throw new Error("Cannot delete a driver with existing drivers.");
+            throw new ConflictError("Cannot delete a driver with existing drivers.");
         }
         const cars = await carModel.findByTeam(id);
         if(cars.length>0)
         {
-            throw new Error("Cannot delete a driver with existing cars.");
+            throw new ConflictError("Cannot delete a driver with existing cars.");
         }
         return teamModel.delete(id);
     }

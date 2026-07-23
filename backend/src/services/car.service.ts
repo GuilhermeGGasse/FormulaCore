@@ -1,5 +1,6 @@
 import { carModel } from "../models/car.model.js"
 import { NotFoundError } from "../errors/NotFoundError.js";
+import { ValidationError } from "../errors/validationError.js";
 
 export const carService =
 {
@@ -46,16 +47,16 @@ export const carService =
             throw new NotFoundError("car not found.");
         }
         if (data.chassisName == undefined && data.engineSupplier == undefined && data.power == undefined && data.season == undefined && data.teamId == undefined && data.weight == undefined) {
-            throw new NotFoundError("None field passed.");
+            throw new ValidationError("None field passed.");
         }
         if (data.power !== undefined && data.power <= 0) {
-            throw new NotFoundError("Invalid value.");
+            throw new ValidationError("Invalid value.");
         }
         if (data.weight !== undefined && data.weight <= 0) {
-            throw new NotFoundError("Invalid value.");
+            throw new ValidationError("Invalid value.");
         }
         if (data.season !== undefined && (data.season <= 1950 || data.season >= 2026 + 1)) {
-            throw new NotFoundError("Invalid season.");
+            throw new ValidationError("Invalid season.");
         }
         return carModel.update(id, data)
     },
