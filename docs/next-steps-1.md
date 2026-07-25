@@ -10,7 +10,7 @@ Remover try/catch redundantes dos controllers (já que o erro central assume ess
 
 Validação de schema de entrada (body/params) antes de chegar no controller - [x] Tarefa concluída
 
-Configuração centralizada de variáveis de ambiente (config/env.ts) - [ ] Tarefa não concluída
+Configuração centralizada de variáveis de ambiente (config/env.ts) - [x] Tarefa concluída
 
 Testar todas as rotas manualmente (Postman/Insomnia) - [ ] Tarefa não concluída
 

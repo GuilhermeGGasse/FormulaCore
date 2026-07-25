@@ -7,7 +7,7 @@ export async function carRoutes(server: FastifyInstance) {
     server.get("/cars/:id", CarController.getCarById);
     server.get("/cars/engine/:engineSupplier", CarController.getCarsByEngine);
     server.get("/cars/season/:season", CarController.getCarsBySeason);
-    server.get("/cars/engine/:team", CarController.getCarsByTeam);
+    server.get("/cars/team/:team", CarController.getCarsByTeam);
     server.post("/cars",
         {
             schema:

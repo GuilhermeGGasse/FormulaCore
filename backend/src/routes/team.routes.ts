@@ -9,14 +9,12 @@ export async function teamRoutes(server: FastifyInstance) {
         {
             body:
             {
+
+                type: "object",
+                required: ["name"],
                 properties:
                 {
-                    type: "object",
-                    required: ["name"],
-                    properties:
-                    {
-                        name: { type: "string" }
-                    }
+                    name: { type: "string" }
                 }
             }
         }
@@ -28,16 +26,15 @@ export async function teamRoutes(server: FastifyInstance) {
             {
                 body:
                 {
+
+                    type: "object",
+                    required: ["name"],
                     properties:
                     {
-                        type: "object",
-                        required: ["name"],
-                        properties:
-                        {
-                            name: { type: "string" }
-                        }
+                        name: { type: "string" }
                     }
                 }
+
             }
         }, TeamController.updateTeam);
     server.delete("/teams/:id", TeamController.deleteTeam)

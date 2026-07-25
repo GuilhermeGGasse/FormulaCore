@@ -46,5 +46,5 @@ export async function raceRoutes(server: FastifyInstance) {
          },
       },
    }, RaceController.createRace);
-   server.delete("races/:id", RaceController.deleteRace);
+   server.delete("/races/:id", RaceController.deleteRace);
 }
