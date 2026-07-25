@@ -7,7 +7,44 @@ export async function raceRoutes(server: FastifyInstance) {
    server.get("/races/country/:country", RaceController.getRacesByCountry);
    server.get("/races/season/:season", RaceController.getRacesBySeason);
    server.get("/races/circuittype/:circuittype", RaceController.getRacesByCircuitType);
-   server.post("/races", RaceController.createRace);
-   server.put("/races/:id", RaceController.createRace);
+   server.post("/races",
+      {
+         schema:
+         {
+            body:
+            {
+               type: "object",
+               required: ["chassisName", "engineSupplier", "power", "weight", "season", "teamId"],
+               properties:
+               {
+                  chassisName: { type: "string" },
+                  engineSupplier: { type: "string" },
+                  power: { type: "number" },
+                  weight: { type: "number" },
+                  season: { type: "number" },
+                  teamId: { type: "number" },
+               },
+            },
+         },
+      }, RaceController.createRace);
+   server.put("/races/:id", {
+      schema:
+      {
+         body:
+         {
+            type: "object",
+            required: [],
+            properties:
+            {
+               chassisName: { type: "string" },
+               engineSupplier: { type: "string" },
+               power: { type: "number" },
+               weight: { type: "number" },
+               season: { type: "number" },
+               teamId: { type: "number" },
+            },
+         },
+      },
+   }, RaceController.createRace);
    server.delete("races/:id", RaceController.deleteRace);
 }

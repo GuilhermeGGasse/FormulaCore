@@ -31,8 +31,10 @@ export const carModel = {
 
     update: (id: number, data: {
         chassisName?: string;
+        engineSupplier?:string;
         power?: number;
         weight?: number;
+        season?: number;
         teamId?: number;
     }) =>
         prisma.car.update({

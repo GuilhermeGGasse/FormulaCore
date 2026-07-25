@@ -57,7 +57,7 @@ export const raceModel = {
     },
     //findlatest
     //findnext
-    update: (id: number, data: { name?: string, date?: Date, season?: number }) => {
+    update: (id: number, data: { name?: string, circuitType?: CircuitType, length?: number, laps?: number, season?: number, date?: Date, country?: string }) => {
         return prisma.race.update({ where: { id }, data })
     },
     delete: (id: number) =>
