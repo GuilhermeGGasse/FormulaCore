@@ -6,7 +6,7 @@ export const TeamController = {
         request: FastifyRequest,
         reply: FastifyReply
     ) => {
-        const teams = teamService.getallTeams();
+        const teams = await teamService.getallTeams();
         return reply.status(200).send(teams);
     },
     getTeamById: async (
@@ -70,7 +70,7 @@ export const TeamController = {
     ) => {
         const { id } = request.params;
 
-        await teamService.deleteTeam(id);
+        await teamService.deleteTeam(Number(id));
 
         return reply.status(204).send();
     }

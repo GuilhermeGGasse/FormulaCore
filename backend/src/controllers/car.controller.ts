@@ -6,7 +6,7 @@ export const CarController = {
         request: FastifyRequest,
         reply: FastifyReply
     ) => {
-        const cars = carService.getAllCars();
+        const cars = await carService.getAllCars();
         return reply.status(200).send(cars);
     },
     getCarById: async (

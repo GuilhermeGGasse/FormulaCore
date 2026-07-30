@@ -7,7 +7,7 @@ export const RaceController = {
         request: FastifyRequest,
         reply: FastifyReply
     ) => {
-        const races = raceService.getallRaces();
+        const races = await raceService.getallRaces();
         return reply.status(200).send(races);
     },
     getRacesById: async (request: FastifyRequest<{

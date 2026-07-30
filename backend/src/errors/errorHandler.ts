@@ -13,8 +13,10 @@ export function registerErrorHandler(fastify: FastifyInstance) {
         }
         if (error instanceof ValidationError) {
             return reply.status(error.statusCode).send({ message: error.message });
-        }        
+        }       
+        console.error(error);  
         return reply.status(500).send({ message: "Internal server error." });
+        //return reply.status(error.statusCode || 500).send({ message: error.message });
     });
 }
 

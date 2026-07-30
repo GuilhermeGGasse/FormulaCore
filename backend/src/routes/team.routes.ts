@@ -9,7 +9,6 @@ export async function teamRoutes(server: FastifyInstance) {
         {
             body:
             {
-
                 type: "object",
                 required: ["name"],
                 properties:
@@ -18,8 +17,7 @@ export async function teamRoutes(server: FastifyInstance) {
                 }
             }
         }
-    }
-        , TeamController.createTeam);
+    }, TeamController.createTeam);
     server.put("/teams/:id",
         {
             schema:

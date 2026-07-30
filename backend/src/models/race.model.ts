@@ -11,13 +11,12 @@ export const raceModel = {
         prisma.race.findUnique(
             {
                 where: { id },
-                include:
-                {
-                    results: true,
-                    include:
-                    {
-                        drivers: true,
-                        teams: true,
+                include: {
+                    results: {
+                        include: {
+                            driver: true,
+                            team: true
+                        }
                     }
                 }
             }
@@ -52,7 +51,7 @@ export const raceModel = {
             }
         );
     },
-    create: (data: { name: string, circuitType: CircuitType, length: number, laps: number, season: number, date: Date, country: string }) => {
+    create: (data: { name: string, circuitType?: CircuitType, length?: number, laps?: number, season: number, date: Date, country: string }) => {
         return prisma.race.create({ data });
     },
     //findlatest

@@ -12,4 +12,5 @@ function getEnvVar(name: string): string {
 export const env = {
   databaseUrl: getEnvVar("DATABASE_URL"),
   port: Number(process.env.PORT) || 3333,
+  jolpicaBaseUrl: process.env.JOLPICA_BASE_URL || "https://api.jolpi.ca/ergast/f1",
 };

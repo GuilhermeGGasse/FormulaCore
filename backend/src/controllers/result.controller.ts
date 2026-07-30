@@ -7,7 +7,7 @@ export const ResultController = {
         request: FastifyRequest,
         reply: FastifyReply
     ) => {
-        const results = resultService.getAllResults();
+        const results = await resultService.getAllResults();
         return reply.status(200).send(results);
     },
     getResultById: async (request: FastifyRequest<{
@@ -20,10 +20,6 @@ export const ResultController = {
         const result = await resultService.getResultById(id);
         return reply.status(200).send(result);
     },
-    //getResultByDriver
-    //getResultByTeam
-    //getResultsBySeason
-    //getResultsByRace
     getResultsByDriver: async (request: FastifyRequest<{
         Params: {
             driverId: string;

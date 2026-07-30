@@ -49,9 +49,9 @@ model Car {
 model Race {
   id Int @id @default(autoincrement())
   name String
-  circuitType CircuitType
-  length Float
-  laps Int
+  circuitType CircuitType?
+  length Float?
+  laps Int?
   season Int
   date DateTime
   country String

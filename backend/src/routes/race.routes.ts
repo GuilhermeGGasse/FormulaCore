@@ -14,15 +14,16 @@ export async function raceRoutes(server: FastifyInstance) {
             body:
             {
                type: "object",
-               required: ["chassisName", "engineSupplier", "power", "weight", "season", "teamId"],
+               required: ["name", "season", "date", "country"],
                properties:
                {
-                  chassisName: { type: "string" },
-                  engineSupplier: { type: "string" },
-                  power: { type: "number" },
-                  weight: { type: "number" },
+                  name: { type: "string" },
+                  circuitType: { type: "string" },
+                  length: { type: "number" },
+                  laps: { type: "number" },
                   season: { type: "number" },
-                  teamId: { type: "number" },
+                   date: { type: "string", format: "date-time" },
+                  country: { type: "string" },
                },
             },
          },

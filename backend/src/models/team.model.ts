@@ -19,7 +19,7 @@ export const teamModel = {
     }),
 
   findByName: (name: string) =>
-    prisma.team.findMany({
+    prisma.team.findFirst({
       where: {name}
       
     }),

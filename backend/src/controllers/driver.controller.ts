@@ -6,7 +6,7 @@ export const DriverController = {
         request: FastifyRequest,
         reply: FastifyReply
     ) => {
-        const drivers = driverService.getAllDrivers();
+        const drivers = await driverService.getAllDrivers();
         return reply.status(200).send(drivers);
     },
     getDriverById: async (
@@ -18,7 +18,7 @@ export const DriverController = {
         reply: FastifyReply
     ) => {
         const { id } = request.params;
-        const driver = await driverService.getDriverById(id);
+        const driver = await driverService.getDriverById(Number(id));
         return reply.status(200).send(driver);
     },
     createDriver: async (request: FastifyRequest<{
@@ -55,7 +55,7 @@ export const DriverController = {
         const { name, number, teamId } = request.body;
 
         const driver = await driverService.updateDriver(
-            id,
+            (Number(id)),
             {
                 name,
                 number,

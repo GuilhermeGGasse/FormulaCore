@@ -8,8 +8,8 @@ import { ValidationError } from "../errors/validationError.js";
 
 export const teamService =
 {
-    getallTeams: () => {
-        const teams = teamModel.findAll();
+    getallTeams:  () => {
+        const teams =  teamModel.findAll();
         return teams;
     },
     getTeamById: async (id: number) => {

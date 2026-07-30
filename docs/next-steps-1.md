@@ -12,7 +12,7 @@ Validação de schema de entrada (body/params) antes de chegar no controller - [
 
 Configuração centralizada de variáveis de ambiente (config/env.ts) - [x] Tarefa concluída
 
-Testar todas as rotas manualmente (Postman/Insomnia) - [ ] Tarefa não concluída
+Testar todas as rotas manualmente (Postman/Insomnia) - [x] Tarefa concluída
 
 Popular banco de dados com dados reais - [ ] Tarefa não concluída
 
