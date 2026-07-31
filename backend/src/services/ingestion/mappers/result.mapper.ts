@@ -1,3 +1,9 @@
+import { NotFoundError } from "../../../errors/NotFoundError.js";
+import { driverModel } from "../../../models/driver.model.js";
+import { resultModel } from "../../../models/result.model.js";
+import { teamModel } from "../../../models/team.model.js";
+import { prisma } from "../../../utils/prisma-central.js";
+
 //
 type JolpicaResult = {
   position: string;
@@ -13,11 +19,19 @@ type JolpicaResult = {
 };
 
 async function findDriverIdByJolpicaId(jolpicaDriverId: string): Promise<number> {
-  throw new Error("Not implemented");
+  const driver = await driverModel.findByJolpicaId(jolpicaDriverId);
+   if (!driver) {
+    throw new NotFoundError(`Driver not found for Jolpica id: ${jolpicaDriverId}`);
+  }
+  return driver.id;
 }
 
 async function findTeamIdByJolpicaId(jolpicaConstructorId: string): Promise<number> {
-  throw new Error("Not implemented");
+  const team = await teamModel.findByJolpicaId(jolpicaConstructorId);
+  if (!team) {
+    throw new NotFoundError(`Driver not found for Jolpica id: ${jolpicaConstructorId}`);
+  }
+  return team.id;
 }
 
 export async function mapJolpicaResult(jolpicaResult: JolpicaResult, raceId: number) {

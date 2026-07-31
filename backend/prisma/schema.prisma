@@ -17,9 +17,10 @@ model Driver {
   id Int @id @default(autoincrement())
   name String
   number Int
-  teamId Int
-  team Team @relation (fields: [teamId], references: [id])
+  teamId Int?
+  team Team? @relation (fields: [teamId], references: [id])
   results Result[]
+  jolpicaId String?
 }
 
 model Team {
@@ -28,6 +29,7 @@ model Team {
   drivers Driver[]
   cars Car[]
   results Result[]
+  jolpicaId String?
 }
 
 enum CircuitType {

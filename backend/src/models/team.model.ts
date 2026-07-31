@@ -1,12 +1,12 @@
 import { prisma } from "../utils/prisma-central.js";
 
 export const teamModel = {
-    findAll: () => prisma.team.findMany({
-        include: {
-            drivers: true,
-            cars: true,
-        },
-    }),
+  findAll: () => prisma.team.findMany({
+    include: {
+      drivers: true,
+      cars: true,
+    },
+  }),
 
   findById: (id: number) =>
     prisma.team.findUnique({
@@ -20,11 +20,15 @@ export const teamModel = {
 
   findByName: (name: string) =>
     prisma.team.findFirst({
-      where: {name}
-      
+      where: { name }
+
     }),
-    
-  create: (data: { name: string }) =>
+
+  findByJolpicaId: (jolpicaId: string) => {
+    return prisma.team.findFirst({ where: { jolpicaId } })
+  },
+
+  create: (data: { name: string, jolpicaId?: string }) =>
     prisma.team.create({ data }),
 
   update: (id: number, data: { name?: string }) =>

@@ -1,11 +1,12 @@
 //
 type JolpicaTeam = {
     name: string;
-    //constructorId: string;
+    constructorId: string;
 };
 
 export function mapJolpicaTeam(jolpicaTeam: JolpicaTeam) {
     return{
        name: jolpicaTeam.name,
+       JolpicaId: jolpicaTeam.constructorId
     };
 }

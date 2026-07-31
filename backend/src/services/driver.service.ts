@@ -18,7 +18,7 @@ export const driverService =
         }
         return driver;
     },
-    createDriver: async (data: { name: string, number: number, teamId: number }) => {
+    createDriver: async (data: { name: string, number: number, teamId: number, jolpicaId?: string  }) => {
         const team = await teamModel.findById(data.teamId);
         if (!team) {
             throw new NotFoundError("Team not found.");

@@ -19,7 +19,7 @@ export const teamService =
         }
         return team;
     },
-    createTeam: async (data: { name: string }) => {
+    createTeam: async (data: { name: string, jolpicaId?: string  }) => {
         const teamName = await teamModel.findByName(data.name);
         if (teamName) {
             throw new ConflictError("Team already exists.");
