@@ -11,6 +11,6 @@ export interface Race{
     laps: number | null;
     season: number | null;
     date: Date | null;
-    country: number | null;
+    country: string | null;
     //result
 };
