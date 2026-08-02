@@ -8,8 +8,8 @@ export async function getResults(): Promise<Result[]> {
 export async function getResultById(id: number): Promise<Result> {
     return apiFetch<Result>(`/results/${id}`);
 }
-export async function getRacesByDriver(driver: string): Promise<Result[]> {
-    return apiFetch<Result[]>(`/results/drivers/${driver}`);
+export async function getResultsByDriver(driverId: number): Promise<Result[]> {
+    return apiFetch<Result[]>(`/results/drivers/${driverId}`);
 }
 export function getResultsByTeam(teamId: number): Promise<Result[]> {
   return apiFetch<Result[]>(`/results/teams/${teamId}`);

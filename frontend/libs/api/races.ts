@@ -15,7 +15,7 @@ export async function getRacesByCountry(country: string): Promise<Race[]> {
 export async function getRacesBySeason(season: number): Promise<Race[]> {
     return apiFetch<Race[]>(`/races/season/${season}`);
 }
-export async function getRacesBySCircuitType(circuitType: CircuitType): Promise<Race[]> {
+export async function getRacesByCircuitType(circuitType: CircuitType): Promise<Race[]> {
     return apiFetch<Race[]>(`/races/circuitType/${circuitType}`);
 }
 
