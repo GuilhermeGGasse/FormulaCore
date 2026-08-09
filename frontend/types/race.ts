@@ -10,7 +10,7 @@ export interface Race{
     lenght: number | null;
     laps: number | null;
     season: number | null;
-    date: Date | null;
+    date: string | null;
     country: string | null;
     //result
 };
