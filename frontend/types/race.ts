@@ -7,7 +7,7 @@ export interface Race{
     id: number;
     name: string;
     circuitType: CircuitType | null;
-    lenght: number | null;
+    length: number | null;
     laps: number | null;
     season: number | null;
     date: string | null;

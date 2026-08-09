@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import {getTeams, getTeamById} from "../api/teams";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createTeam, updateTeam, deleteTeam } from "@/libs/api/teams"; // ⚠️ ajustar path e conferir se createTeam/deleteTeam existem no seu teams.ts
+import { createTeam, updateTeam, deleteTeam } from "@/libs/api/teams";
 import { TeamFormData } from "@/libs/schemas/teamSchema";
 
 export function useTeams() {
@@ -17,8 +17,6 @@ export function useTeam(id: number) {
         queryFn: () => getTeamById(id),
     });
 }
-
-// libs/hooks/useTeams.ts (adições — mantém os useQuery já existentes)
 
 export function useCreateTeam() {
   const queryClient = useQueryClient();

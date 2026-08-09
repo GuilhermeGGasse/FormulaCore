@@ -2,6 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { getRaces, getRaceById, getRacesByCountry, getRacesByCircuitType, getRacesBySeason } from "../api/races";
 import { CircuitType } from "@/types/race";
 
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createRace, updateRace, deleteRace } from "@/libs/api/races";
+import { RaceFormData } from "@/libs/schemas/raceSchema";
+
 export function useRaces() {
     return useQuery({
         queryKey: ["races"],
@@ -30,6 +34,37 @@ export function useRacesBySeason(season: number) {
     return useQuery({
         queryKey: ["races", season],
         queryFn: () => getRacesBySeason(season),
+    });
+}
+
+export function useCreateRace() {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: (data: RaceFormData) => createRace(data),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["cars"] });
+        },
+    });
+}
+export function useUpdateRace(id: number) {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: (data: RaceFormData) => updateRace(id, data),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["races"] });
+        },
+    });
+}
+export function useDeleteRace() {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: (id: number) => deleteRace(id),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["races"] });
+        },
     });
 }
 

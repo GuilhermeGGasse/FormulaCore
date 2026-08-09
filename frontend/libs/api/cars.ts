@@ -18,7 +18,7 @@ export async function getCarsByTeam(team:string): Promise<Car[]> {
      return apiFetch<Car[]>(`/cars/teams/${team}`);
 }
 
-export function createResult(data: Omit<Car, "id">): Promise<Car> {
+export function createCar(data: Omit<Car, "id">): Promise<Car> {
   return apiFetch<Car>("/cars", {
     method: "POST",
     body: JSON.stringify(data),

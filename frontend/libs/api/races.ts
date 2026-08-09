@@ -3,6 +3,8 @@
 import { apiFetch } from "./client";
 import { CircuitType, Race } from "../../types/race";
 
+import { RaceFormData } from "../schemas/raceSchema";
+
 export async function getRaces(): Promise<Race[]> {
     return apiFetch<Race[]>("/races");
 }
@@ -19,7 +21,7 @@ export async function getRacesByCircuitType(circuitType: CircuitType): Promise<R
     return apiFetch<Race[]>(`/races/circuitType/${circuitType}`);
 }
 
-export function createRace(data: Omit<Race, "id">): Promise<Race> {
+export function createRace(data: RaceFormData): Promise<Race> {
   return apiFetch<Race>("/races", {
     method: "POST",
     body: JSON.stringify(data),

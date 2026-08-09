@@ -112,3 +112,27 @@ Aqui vai a documentação resumida:
 **Correção:** reiniciar o TS Server do VS Code (`Ctrl+Shift+P` → "TypeScript: Restart TS Server").
 
 **Aprendizado geral:** ao alterar `schema.prisma` e rodar a migration, se o erro de tipo persistir mesmo com tudo aparentemente correto, reiniciar o TS Server antes de suspeitar de erro real no código — é a causa mais comum desse tipo de sintoma "fantasma".
+
+**Documentação — Setup e Troubleshooting (frontend)**
+
+*Erro: erro `Cannot find name 'process'` / tipos do Node não reconhecidos*
+
+Causa possível: o TS Server do editor não recarrega sozinho depois de instalar `@types/node`.
+
+Solução: `Ctrl+Shift+P` → "TypeScript: Restart TS Server".
+
+Se persistir mesmo após o restart, verificar se `tsconfig.json` existe de fato na raiz de `frontend/` — a ausência dele é sintoma de um setup incompleto do `create-next-app` (ver Problema 2).
+
+---
+
+*Erro: `create-next-app` incompleto*
+
+Sintomas: `package.json` sem `next`, `react`, `react-dom` ou scripts (`dev`, `build`); pasta `node_modules` vazia ou incompleta; `tsconfig.json` ausente; `npx next dev` tenta baixar o Next.js na hora e falha com erro de workspace root.
+
+Causa: o comando `npx create-next-app@latest .` não terminou de rodar até o fim (rede, cancelamento acidental, etc.), deixando o projeto num estado parcial.
+
+Solução: apagar a pasta `frontend/` (salvando antes qualquer código já escrito manualmente, como `types/` e `libs/`) e rodar `npx create-next-app@latest .` novamente do zero, respondendo aos prompts com atenção — especialmente confirmar "TypeScript: Yes".
+
+---
+
+Posso seguir com a documentação de decisão de arquitetura dos pontos 3 e 4 (jolpicaId opcional, tipo do zod como parâmetro de create/update) quando quiser.

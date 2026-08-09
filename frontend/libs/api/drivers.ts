@@ -2,6 +2,7 @@
 
 import { apiFetch } from "./client";
 import { Driver } from "../../types/driver";
+import { DriverFormData } from "../schemas/driverSchema";
 
 export function getDrivers(): Promise<Driver[]> {
   return apiFetch<Driver[]>("/drivers");
@@ -11,7 +12,7 @@ export function getDriverById(id: number): Promise<Driver> {
 }
 // libs/api/drivers.ts (adições)
 
-export function createDriver(data: Omit<Driver, "id">): Promise<Driver> {
+export function createDriver(data: DriverFormData): Promise<Driver> {
   return apiFetch<Driver>("/drivers", {
     method: "POST",
     body: JSON.stringify(data),
