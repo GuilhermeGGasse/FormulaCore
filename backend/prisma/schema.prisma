@@ -46,6 +46,7 @@ model Car {
   season       Int     
   teamId       Int
   team         Team     @relation(fields: [teamId], references: [id])
+  results Result[]
 }
 
 model Race {
@@ -72,4 +73,6 @@ model Result {
   driver     Driver   @relation(fields: [driverId], references: [id])
   teamId     Int
   team       Team     @relation(fields: [teamId], references: [id])
+  carId      Int
+  car        Car      @relation(fields: [carId], references: [id])
 }

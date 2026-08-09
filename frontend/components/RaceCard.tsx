@@ -13,7 +13,7 @@ export function RaceCard({ race }: { race: Race }) {
           <CardTitle>{race.name}</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-wrap gap-2 items-center">
-          <Badge variant="secondary">Número {race.season}</Badge>
+          <Badge variant="secondary">{race.season}</Badge>
           <Badge variant="outline">{race.country}</Badge>
                 {race.circuitType && (
                   <Badge variant="outline">{race.circuitType}</Badge>

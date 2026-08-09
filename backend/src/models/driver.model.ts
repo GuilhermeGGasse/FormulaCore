@@ -2,16 +2,37 @@
 import { prisma } from "../utils/prisma-central.js";
 
 export const driverModel = {
-  findAll: () => prisma.driver.findMany(),
+  findAll: () => prisma.driver.findMany(
+    {
+      include: {
+        team: true,
+      }
+    }
+  ),
 
-  findById: (id: number) => prisma.driver.findUnique({ where: { id } }),
+  findById: (id: number) => prisma.driver.findUnique({
+    where: { id },
+    include: {
+      team: true,
+    }
+  }),
 
   findByTeam: (teamId: number) => {
-    return prisma.driver.findMany({ where: { teamId } })
+    return prisma.driver.findMany({
+      where: { teamId },
+      include: {
+        team: true,
+      }
+    })
   },
 
   findByJolpicaId: (jolpicaId: string) => {
-    return prisma.driver.findFirst({ where: { jolpicaId } })
+    return prisma.driver.findFirst({
+      where: { jolpicaId },
+      include: {
+        team: true,
+      }
+    })
   },
 
   create: (data: { name: string; number: number; teamId?: number, jolpicaId?: string }) =>
