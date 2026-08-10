@@ -9,6 +9,7 @@ import { useCreateRace, useUpdateRace } from "@/libs/hooks/useRaces";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { createRace, updateRace } from "@/libs/api/races";
 
 interface RaceFormProps {
     raceId?: number; // se presente, é edição; se ausente, é criação
@@ -16,7 +17,7 @@ interface RaceFormProps {
     onSuccess?: () => void;
 }
 
-export function CarForm({ raceId, defaultValues, onSuccess }: RaceFormProps) {
+export function RaceForm({ raceId, defaultValues, onSuccess }: RaceFormProps) {
     const {
         register,
         handleSubmit,
@@ -26,11 +27,11 @@ export function CarForm({ raceId, defaultValues, onSuccess }: RaceFormProps) {
         defaultValues,
     });
 
-    const createCar = useCreateRace();
-    const updateCar = useUpdateRace(raceId ?? 0);
+    const createRace = useCreateRace();
+    const updateRace = useUpdateRace(raceId ?? 0);
 
     const isEditing = Boolean(raceId);
-    const mutation = isEditing ? updateCar : createCar;
+    const mutation = isEditing ? updateRace : createRace;
 
     function onSubmit(data: RaceFormData) {
         mutation.mutate(data, {
@@ -43,14 +44,14 @@ export function CarForm({ raceId, defaultValues, onSuccess }: RaceFormProps) {
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
                 <Label htmlFor="chassisName">Nome</Label>
-                <Input id="name" {...register("name")} />
+                <Input id="chassisName" {...register("name")} />
                 {errors.name && (
                     <p className="text-sm text-red-500">{errors.name.message}</p>
                 )}
             </div>
             <div className="flex flex-col gap-1">
                 <Label htmlFor="circuitType">Tipo de Circuito</Label>
-                <Input id="name" {...register("circuitType")} />
+                <Input id="circuitType" {...register("circuitType")} />
                 {errors.circuitType && (
                     <p className="text-sm text-red-500">{errors.circuitType.message}</p>
                 )}
@@ -63,7 +64,7 @@ export function CarForm({ raceId, defaultValues, onSuccess }: RaceFormProps) {
                 )}
             </div>
             <div className="flex flex-col gap-1">
-                <Label htmlFor="chassisName">Número de voltas</Label>
+                <Label htmlFor="laps">Número de voltas</Label>
                 <Input id="laps" {...register("laps")} />
                 {errors.laps && (
                     <p className="text-sm text-red-500">{errors.laps.message}</p>
@@ -84,7 +85,7 @@ export function CarForm({ raceId, defaultValues, onSuccess }: RaceFormProps) {
                 )}
             </div>
             <div className="flex flex-col gap-1">
-                <Label htmlFor="chassisName">País</Label>
+                <Label htmlFor="country">País</Label>
                 <Input id="country" {...register("country")} />
                 {errors.country && (
                     <p className="text-sm text-red-500">{errors.country.message}</p>

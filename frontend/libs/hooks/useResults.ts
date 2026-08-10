@@ -1,5 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getResults, getResultById, getResultsByDriver, getResultsByRace, getResultsBySeason, getResultsByTeam } from "../api/results";
+import { getResults, getResultById, getResultsByDriver, getResultsByRace, getResultsBySeason, getResultsByTeam, createResult, updateResult, deleteResult } from "../api/results";
+
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createRace, updateRace, deleteRace } from "@/libs/api/races";
+import { RaceFormData } from "@/libs/schemas/raceSchema";
+import { ResultFormData } from "../schemas/resultSchema";
 
 export function useResults() {
     return useQuery({
@@ -35,5 +40,36 @@ export function useResultByTeam(teamId: number) {
     return useQuery({
         queryKey: ["results", teamId],
         queryFn: () => getResultsByTeam(teamId),
+    });
+}
+
+export function useCreateResult() {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: (data: ResultFormData) => createResult(data),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["results"] });
+        },
+    });
+}
+export function useUpdateResult(id: number) {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: (data: ResultFormData) => updateResult(id, data),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["results"] });
+        },
+    });
+}
+export function useDeleteResult() {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: (id: number) => deleteResult(id),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["results"] });
+        },
     });
 }

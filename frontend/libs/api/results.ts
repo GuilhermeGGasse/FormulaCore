@@ -1,6 +1,7 @@
 // libs/api/results.ts
 import { apiFetch } from "./client";
 import {Result} from "../../types/result";
+import { ResultFormData } from "../schemas/resultSchema";
 
 export async function getResults(): Promise<Result[]> {
     return apiFetch<Result[]>("/results");
@@ -21,7 +22,7 @@ export function getResultsByRace(raceId: number): Promise<Result[]> {
   return apiFetch<Result[]>(`/results/races/${raceId}`);
 }
 
-export function createResult(data: Omit<Result, "id">): Promise<Result> {
+export function createResult(data: ResultFormData): Promise<Result> {
   return apiFetch<Result>("/results", {
     method: "POST",
     body: JSON.stringify(data),

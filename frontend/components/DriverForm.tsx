@@ -11,12 +11,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 interface DriverFormProps {
-    teamId?: number; // se presente, é edição; se ausente, é criação
+    driverId?: number; // se presente, é edição; se ausente, é criação
     defaultValues?: DriverFormData;
     onSuccess?: () => void;
 }
 
-export function DriverForm({ teamId, defaultValues, onSuccess }: DriverFormProps) {
+export function DriverForm({ driverId, defaultValues, onSuccess }: DriverFormProps) {
     const {
         register,
         handleSubmit,
@@ -26,11 +26,11 @@ export function DriverForm({ teamId, defaultValues, onSuccess }: DriverFormProps
         defaultValues,
     });
 
-    const createCar = useCreateDriver();
-    const updateCar = useUpdateDriver(teamId ?? 0);
+    const createDriver = useCreateDriver();
+    const updateDriver = useUpdateDriver(driverId ?? 0);
 
-    const isEditing = Boolean(teamId);
-    const mutation = isEditing ? updateCar : createCar;
+    const isEditing = Boolean(driverId);
+    const mutation = isEditing ? updateDriver : createDriver;
 
     function onSubmit(data: DriverFormData) {
         mutation.mutate(data, {
@@ -43,17 +43,24 @@ export function DriverForm({ teamId, defaultValues, onSuccess }: DriverFormProps
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
-                <Label htmlFor="chassisName">Motorista</Label>
+                <Label htmlFor="name">Piloto</Label>
                 <Input id="name" {...register("name")} />
                 {errors.name && (
                     <p className="text-sm text-red-500">{errors.name.message}</p>
                 )}
             </div>
             <div className="flex flex-col gap-1">
-                <Label htmlFor="chassisName">Número</Label>
-                <Input id="name" {...register("number")} />
+                <Label htmlFor="number">Número</Label>
+                <Input id="number" {...register("number")} />
                 {errors.number && (
                     <p className="text-sm text-red-500">{errors.number.message}</p>
+                )}
+            </div>
+            <div className="flex flex-col gap-1">
+                <Label htmlFor="teamId">Equipe (ID)</Label>
+                <Input id="teamId" type="number" {...register("teamId", { valueAsNumber: true })} />
+                {errors.teamId && (
+                    <p className="text-sm text-red-500">{errors.teamId.message}</p>
                 )}
             </div>
 

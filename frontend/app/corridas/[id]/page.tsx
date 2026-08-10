@@ -27,7 +27,7 @@ export default function CorridaDetalhePage() {
           <Badge variant="secondary">Número {race.season}</Badge>
           <Badge variant="secondary">Número {race.country}</Badge>
           <Badge variant="secondary">Número {race.circuitType}</Badge>
-          <Badge variant="secondary">Número {race.lenght}</Badge>
+          <Badge variant="secondary">Número {race.length}</Badge>
           <Badge variant="secondary">Número {race.laps}</Badge>
           <Badge variant="secondary">{race.date ? new Date(race.date).toLocaleDateString() : "Data desconhecida"}</Badge>
           {/* ⚠️ equipe pendente — depende da relação via include no backend */}

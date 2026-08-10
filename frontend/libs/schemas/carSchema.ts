@@ -9,7 +9,7 @@ export const carSchema = z.object({
   power: z.number("Power é obrigatório"),
   weight: z.number("Weight é obrigatório"),
   season: z.number("Season é obrigatório"),
-  teamId: z.number("Id do time é obrigatório"),
+  teamId: z.number("Id da equipe é obrigatório"),
 });
 
 export type CarFormData = z.infer<typeof carSchema>;

@@ -2,8 +2,7 @@
 
 "use client";
 
-import { useRaces } from "../../libs/hooks/useRaces"; // ⚠️ ajustar path conforme sua estrutura
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { useRaces } from "../../libs/hooks/useRaces"; 
 import { RaceCard } from "@/components/RaceCard";
 import { Loading } from "@/components/Loading";
 import { ErrorMessage } from "@/components/ErrorMessage";

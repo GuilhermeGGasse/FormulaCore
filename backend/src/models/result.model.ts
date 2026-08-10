@@ -54,7 +54,7 @@ export const resultModel = {
         );
     },
 
-    create: (data: { position: number, points: number, laps: number, status: string, raceId: number, driverId: number, teamId: number }) => {
+    create: (data: { position: number, points: number, laps: number, status: string, raceId: number, driverId: number, teamId: number, carId:number }) => {
         return prisma.result.create({ data })
     },
 

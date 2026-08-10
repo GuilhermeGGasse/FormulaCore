@@ -10,14 +10,14 @@ export function ResultCard({ result }: { result: Result }) {
     <Link href={`/resultados/${result.id}`}>
       <Card className="hover:shadow-md transition-shadow">
         <CardHeader>
-          <CardTitle>{result.id}</CardTitle>
+          <CardTitle>{result.driver.name}</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-wrap gap-2 items-center">
-          <Badge variant="secondary">Número {result.position}</Badge>
+          <Badge variant="secondary">{result.position}</Badge>
           <Badge variant="outline">{result.status}</Badge>
           <Badge variant="outline">{result.points}</Badge>
-          
-          {/* ⚠️ equipe pendente — depende da relação via include no backend */}
+          <Badge variant="outline">{result.team.name}</Badge>
+          <Badge variant="outline">{result.race.name}</Badge>
         </CardContent>
       </Card>
     </Link>

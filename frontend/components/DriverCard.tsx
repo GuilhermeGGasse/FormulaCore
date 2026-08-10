@@ -17,7 +17,7 @@ export function DriverCard({ driver }: { driver: Driver }) {
           {driver.nationality && (
             <Badge variant="outline">{driver.nationality}</Badge>
           )}
-          {/* ⚠️ equipe pendente — depende da relação via include no backend */}
+          <Badge variant="outline">{driver.team.name}</Badge>
         </CardContent>
       </Card>
     </Link>
