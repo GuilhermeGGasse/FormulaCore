@@ -58,21 +58,21 @@ export function RaceForm({ raceId, defaultValues, onSuccess }: RaceFormProps) {
             </div>
             <div className="flex flex-col gap-1">
                 <Label htmlFor="length">Comprimento</Label>
-                <Input id="length" {...register("length")} />
+                <Input id="length" {...register("length", { valueAsNumber: true })} />
                 {errors.length && (
                     <p className="text-sm text-red-500">{errors.length.message}</p>
                 )}
             </div>
             <div className="flex flex-col gap-1">
                 <Label htmlFor="laps">Número de voltas</Label>
-                <Input id="laps" {...register("laps")} />
+                <Input id="laps" {...register("laps", { valueAsNumber: true })} />
                 {errors.laps && (
                     <p className="text-sm text-red-500">{errors.laps.message}</p>
                 )}
             </div>
             <div className="flex flex-col gap-1">
                 <Label htmlFor="season">Temporada</Label>
-                <Input id="season" {...register("season")} />
+                <Input id="season" {...register("season", { valueAsNumber: true })} />
                 {errors.season && (
                     <p className="text-sm text-red-500">{errors.season.message}</p>
                 )}

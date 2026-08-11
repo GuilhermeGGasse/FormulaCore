@@ -57,28 +57,28 @@ export function CarForm({ carId, defaultValues, onSuccess }: CarFormProps) {
             </div>
             <div className="flex flex-col gap-1">
                 <Label htmlFor="power">Potência</Label>
-                <Input id="power" {...register("power")} />
+                <Input id="power" {...register("power", { valueAsNumber: true })} />
                 {errors.power && (
                     <p className="text-sm text-red-500">{errors.power.message}</p>
                 )}
             </div>
             <div className="flex flex-col gap-1">
                 <Label htmlFor="weight">Peso</Label>
-                <Input id="weight" {...register("weight")} />
+                <Input id="weight" {...register("weight", { valueAsNumber: true })} />
                 {errors.weight && (
                     <p className="text-sm text-red-500">{errors.weight.message}</p>
                 )}
             </div>
             <div className="flex flex-col gap-1">
-                <Label htmlFor="season">Temporada </Label>
-                <Input id="season" {...register("weight")} />
+                <Label htmlFor="season">Temporada</Label>
+                <Input id="season" {...register("season", { valueAsNumber: true })} />
                 {errors.season && (
                     <p className="text-sm text-red-500">{errors.season.message}</p>
                 )}
             </div>
             <div className="flex flex-col gap-1">
                 <Label htmlFor="teamId">Id do time</Label>
-                <Input id="teamId" {...register("weight")} />
+                <Input id="teamId" {...register("teamId", { valueAsNumber: true })} />
                 {errors.teamId && (
                     <p className="text-sm text-red-500">{errors.teamId.message}</p>
                 )}

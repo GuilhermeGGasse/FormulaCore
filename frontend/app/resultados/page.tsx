@@ -5,6 +5,7 @@ import { Loading } from "@/components/Loading";
 import { useResults } from "../../libs/hooks/useResults"; 
 import { ResultCard } from "@/components/ResultCard";
 import { ErrorMessage } from "@/components/ErrorMessage";
+import { ResultsTable } from "@/components/ResultsTable";
 
 export default function resultadosPage() {
   const { data: results, isLoading, isError } = useResults();
@@ -18,8 +19,8 @@ export default function resultadosPage() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 
         {results?.map((result) => (
-              <ResultCard key={result.id} result={result}></ResultCard>
-                  
+             // <ResultCard key={result.id} result={result}></ResultCard>
+             <ResultsTable results={results ?? []} />       
         ))}
       </div>
     </div>

@@ -18,6 +18,8 @@ export function ResultCard({ result }: { result: Result }) {
           <Badge variant="outline">{result.points}</Badge>
           <Badge variant="outline">{result.team.name}</Badge>
           <Badge variant="outline">{result.race.name}</Badge>
+          <Badge variant="outline">{result.car.chassisName}</Badge>
+          <Badge variant="outline">{result.car.engineSupplier}</Badge>
         </CardContent>
       </Card>
     </Link>
