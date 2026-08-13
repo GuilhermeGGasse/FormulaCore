@@ -20,7 +20,7 @@ model Driver {
   teamId Int?
   team Team? @relation (fields: [teamId], references: [id])
   results Result[]
-  jolpicaId String?
+  jolpicaId String? @unique
 }
 
 model Team {
@@ -29,7 +29,7 @@ model Team {
   drivers Driver[]
   cars Car[]
   results Result[]
-  jolpicaId String?
+  jolpicaId String? @unique
 }
 
 enum CircuitType {
@@ -52,6 +52,7 @@ model Car {
 model Race {
   id Int @id @default(autoincrement())
   name String
+  round Int
   circuitType CircuitType?
   length Float?
   laps Int?
@@ -59,6 +60,8 @@ model Race {
   date DateTime
   country String
   results Result[]
+
+  @@unique([season, round])
 }
 
 model Result {
@@ -73,6 +76,7 @@ model Result {
   driver     Driver   @relation(fields: [driverId], references: [id])
   teamId     Int
   team       Team     @relation(fields: [teamId], references: [id])
-  carId      Int
-  car        Car      @relation(fields: [carId], references: [id])
+  carId      Int?
+  car        Car?      @relation(fields: [carId], references: [id])
+   @@unique([raceId, driverId])
 }

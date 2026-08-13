@@ -41,6 +41,7 @@ export const raceService =
     },
     createRace: async (data: {
         name: string,
+        round: number,
         circuitType?: CircuitType,
         length?: number,
         laps?: number,

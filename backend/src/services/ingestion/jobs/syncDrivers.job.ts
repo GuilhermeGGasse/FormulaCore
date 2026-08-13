@@ -1,63 +1,30 @@
+// syncDrivers.job.ts
 import { jolpicaClient } from "../jolpica.client.js";
 import { mapJolpicaDriver } from "../mappers/driver.mapper.js";
-import { driverModel } from "../../../models/driver.model.js";
+import { prisma } from "../../../utils/prisma-central.js";
 
-export async function syncDriversJob(season: number) {
+export async function syncDrivers(season: number) {
+  const jolpicaDrivers = await jolpicaClient.getDrivers(season);
 
-    console.log(`Syncing drivers (${season})...`);
+  let synced = 0;
 
-    const jolpicaDrivers = await jolpicaClient.getDrivers(season);
+  for (const jolpicaDriver of jolpicaDrivers) {
+    const driverData = mapJolpicaDriver(jolpicaDriver);
 
-    let created = 0;
-    let updated = 0;
-    let errors = 0;
-
-    for (const jolpicaDriver of jolpicaDrivers) {
-
-        try {
-
-            const mappedDriver = mapJolpicaDriver(jolpicaDriver);
-
-            const existingDriver =
-                await driverModel.findByJolpicaId(mappedDriver.jolpicaId);
-
-            //const teamId = 1; // provisório
-
-            if (!existingDriver) {
-
-                await driverModel.create(
-                    mappedDriver,
-                );
-
-                created++;
-
-            } else {
-
-                await driverModel.update(existingDriver.id, {
-                    name: mappedDriver.name,
-                    number: mappedDriver.number,
-                    //teamId
-                });
-
-                updated++;
-            }
-
-        } catch (err) {
-
-            errors++;
-
-            console.error(err);
-
-        }
-
+    if (!driverData.jolpicaId) {
+      console.warn(`Driver without jolpicaId skipped: ${driverData.name}`);
+      continue;
     }
 
-    console.log(`
-Drivers synchronized!
+    await prisma.driver.upsert({
+      where: { jolpicaId: driverData.jolpicaId },
+      update: driverData,
+      create: driverData,
+    });
 
-Created: ${created}
-Updated: ${updated}
-Errors : ${errors}
-`);
+    synced++;
+  }
 
+  console.log(`[syncDrivers] Season ${season}: ${synced} drivers synced`);
+  return synced;
 }

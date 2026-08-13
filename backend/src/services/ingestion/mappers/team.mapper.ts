@@ -7,6 +7,6 @@ type JolpicaTeam = {
 export function mapJolpicaTeam(jolpicaTeam: JolpicaTeam) {
     return{
        name: jolpicaTeam.name,
-       JolpicaId: jolpicaTeam.constructorId
+       jolpicaId: jolpicaTeam.constructorId
     };
 }

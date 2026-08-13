@@ -54,6 +54,7 @@ export const RaceController = {
         request: FastifyRequest<{
             Body: {
                 name: string,
+                round: number,
                 circuitType: CircuitType,
                 length: number,
                 laps: number,
@@ -63,10 +64,11 @@ export const RaceController = {
             };
         }>, reply: FastifyReply
     ) => {
-        const { name, circuitType, length, laps, season, date, country } = request.body;
+        const { name, round, circuitType, length, laps, season, date, country } = request.body;
 
         const race = await raceService.createRace({
             name,
+            round,
             circuitType,
             length,
             laps,

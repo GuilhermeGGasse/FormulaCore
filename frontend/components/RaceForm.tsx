@@ -43,10 +43,17 @@ export function RaceForm({ raceId, defaultValues, onSuccess }: RaceFormProps) {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
-                <Label htmlFor="chassisName">Nome</Label>
-                <Input id="chassisName" {...register("name")} />
+                <Label htmlFor="name">Nome</Label>
+                <Input id="name" {...register("name")} />
                 {errors.name && (
                     <p className="text-sm text-red-500">{errors.name.message}</p>
+                )}
+            </div>
+            <div className="flex flex-col gap-1">
+                <Label htmlFor="round">Rodada</Label>
+                <Input id="round" {...register("round")} />
+                {errors.round && (
+                    <p className="text-sm text-red-500">{errors.round.message}</p>
                 )}
             </div>
             <div className="flex flex-col gap-1">

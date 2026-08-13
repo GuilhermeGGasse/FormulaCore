@@ -6,6 +6,7 @@ export enum CircuitType {
 export interface Race{
     id: number;
     name: string;
+    round: number;
     circuitType: CircuitType | null;
     length: number | null;
     laps: number | null;

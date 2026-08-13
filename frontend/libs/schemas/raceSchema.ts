@@ -5,6 +5,7 @@ import { z } from "zod";
 
 export const raceSchema = z.object({
   name: z.string().min(1, "Nome é obrigatório"),
+  round: z.number("round é obrigatório"),
   season:  z.number("Season é obrigatório"),
   date: z.string().min(1, "Data é obrigatória"),
   country: z.string("País é obrigatório"),

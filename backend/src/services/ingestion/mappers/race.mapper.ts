@@ -15,6 +15,7 @@ type JolpicaRace = {
 export function mapJolpicaRace(jolpicaRace: JolpicaRace) {
   return {
     name: jolpicaRace.raceName,
+    round: Number(jolpicaRace.round),
     season: Number(jolpicaRace.season),
     date: new Date(jolpicaRace.date),
     country: jolpicaRace.Circuit.Location.country,
