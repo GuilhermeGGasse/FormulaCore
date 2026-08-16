@@ -17,7 +17,7 @@ export function DriverCard({ driver }: { driver: Driver }) {
           {driver.nationality && (
             <Badge variant="outline">{driver.nationality}</Badge>
           )}
-          <Badge variant="outline">{driver.team.name}</Badge>
+          <Badge variant="outline">{driver.team?.name ?? "Sem equipe"}</Badge>
         </CardContent>
       </Card>
     </Link>

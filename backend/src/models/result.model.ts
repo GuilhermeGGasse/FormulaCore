@@ -20,8 +20,6 @@ export const resultModel = {
                 {
                     driver: true,
                     team: true,
-                    status: true,
-                    points: true,
                     race: true,
                     car:true,
                 }

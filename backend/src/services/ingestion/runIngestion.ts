@@ -4,7 +4,7 @@ import { syncDrivers } from "./jobs/syncDrivers.job.js";
 import { syncRaces } from "./jobs/syncRaces.job.js";
 import { syncResults } from "./jobs/syncResults.job.js";
 
-const DELAY_MS = 300; // throttle entre chamadas, evita estourar rate limit da Jolpica
+const DELAY_MS = 700; // throttle entre chamadas, evita estourar rate limit da Jolpica
 
 function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));

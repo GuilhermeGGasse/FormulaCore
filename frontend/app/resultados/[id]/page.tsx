@@ -23,8 +23,8 @@ export default function ResultadoDetalhePage() {
   return (
     <div className="p-6">
       <ResultCard result={result} />
-      <Badge variant="outline">{result.car.chassisName}</Badge>
-      <Badge variant="outline">{result.car.engineSupplier}</Badge>
+      <Badge variant="outline">{result.car?.chassisName ?? "—"}</Badge>
+      <Badge variant="outline">{result.car?.engineSupplier ?? "—"}</Badge>
     </div>
   );
 }

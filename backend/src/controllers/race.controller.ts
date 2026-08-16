@@ -17,7 +17,7 @@ export const RaceController = {
     }>,
         reply: FastifyReply) => {
         const { id } = request.params;
-        const race = await raceService.getRaceById(id);
+        const race = await raceService.getRaceById(Number(id));
         return reply.status(200).send(race);
     },
     getRacesByCountry: async (request: FastifyRequest<{

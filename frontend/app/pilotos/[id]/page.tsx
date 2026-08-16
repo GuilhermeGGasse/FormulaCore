@@ -28,7 +28,7 @@ export default function PilotoDetalhePage() {
           {driver.nationality && (
             <Badge variant="outline">{driver.nationality}</Badge>
           )}
-          <Badge variant="secondary">Número {driver.team.name}</Badge>
+          <Badge variant="outline">{driver.team?.name ?? "Sem equipe"}</Badge>
           {/* ⚠️ equipe pendente — depende da relação via include no backend */}
         </CardContent>
       </Card>

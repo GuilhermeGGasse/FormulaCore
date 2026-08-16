@@ -18,6 +18,7 @@ export async function syncResults(season: number) {
     }
 
     const jolpicaResults = await jolpicaClient.getResults(season, race.round);
+    await new Promise((resolve) => setTimeout(resolve, 300));
 
     for (const jolpicaResult of jolpicaResults) {
       try {

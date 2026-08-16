@@ -30,7 +30,7 @@ export function ResultsTable({ results }: { results: Result[] }) {
             <td className="p-2">{result.race.name}</td>
             <td className="p-2">{result.points}</td>
             <td className="p-2">{result.status}</td>
-            <td className="p-2">{result.car.chassisName}</td>
+            <td className="p-2">{result.car?.chassisName ?? "—"}</td>
           </tr>
         ))}
       </tbody>

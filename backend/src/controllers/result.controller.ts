@@ -17,7 +17,7 @@ export const ResultController = {
     }>,
         reply: FastifyReply) => {
         const { id } = request.params;
-        const result = await resultService.getResultById(id);
+        const result = await resultService.getResultById(Number(id));
         return reply.status(200).send(result);
     },
     getResultsByDriver: async (request: FastifyRequest<{
