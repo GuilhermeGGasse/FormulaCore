@@ -1,3 +1,5 @@
+// libs/hooks/useResults.ts
+
 import { useQuery } from "@tanstack/react-query";
 import { getResults, getResultById, getResultsByDriver, getResultsByRace, getResultsBySeason, getResultsByTeam, createResult, updateResult, deleteResult } from "../api/results";
 

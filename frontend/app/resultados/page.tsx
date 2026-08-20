@@ -14,11 +14,9 @@ export default function resultadosPage() {
   if (isError) return <ErrorMessage message="resultados"/>
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Resultados</h1>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">     
-        <ResultsTable results={results ?? []} />       
-      </div>
+    <div className="p-6 max-w-7xl mx-auto w-full">
+      <h1 className="text-2xl font-bold mb-6">Resultados</h1>
+      <ResultsTable results={results ?? []} />       
     </div>
   );
 }

@@ -3,9 +3,14 @@ import { prisma } from "../utils/prisma-central.js"
 
 export const raceModel = {
     findAll: () => prisma.race.findMany({
+        orderBy: [
+            { season: "desc" },
+            { round: "asc" },
+        ],
         include: {
             results: true,
         },
+
     }),
     findById: (id: number) =>
         prisma.race.findUnique(

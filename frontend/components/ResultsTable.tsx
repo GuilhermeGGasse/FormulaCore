@@ -5,7 +5,8 @@ import Link from "next/link";
 
 export function ResultsTable({ results }: { results: Result[] }) {
   return (
-    <table className="w-full border-collapse text-sm">
+    <div className="w-full overflow-x-auto rounded-lg border shadow-sm">
+    <table className="min-w-full border-collapse text-sm">
       <thead>
         <tr className="border-b text-left">
           <th className="p-2">Posição</th>
@@ -35,5 +36,6 @@ export function ResultsTable({ results }: { results: Result[] }) {
         ))}
       </tbody>
     </table>
+    </div>
   );
 }

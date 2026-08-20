@@ -46,6 +46,7 @@ export const resultModel = {
                 {
                     driver: true,
                     team: true,
+                    race: true,
                     car:true,
                 }
          },            
