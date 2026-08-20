@@ -2,9 +2,9 @@ import { carModel } from "../models/car.model.js";
 import { driverModel } from "../models/driver.model.js";
 import { resultModel } from "../models/result.model.js";
 import { teamModel } from "../models/team.model.js";
-import { ConflictError } from "../errors/conflictError.js";
-import { NotFoundError } from "../errors/NotFoundError.js";
-import { ValidationError } from "../errors/validationError.js";
+import { ConflictError } from "../errors/ConflictError.js";
+import { NotFoundError } from "../errors/NotfoundError.js";
+import { ValidationError } from "../errors/ValidationError.js";
 
 export const teamService =
 {

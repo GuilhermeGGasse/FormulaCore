@@ -1,9 +1,9 @@
 import { driverModel } from "../models/driver.model.js"
 import { teamModel } from "../models/team.model.js";
 import { resultModel } from "../models/result.model.js";
-import { NotFoundError } from "../errors/NotFoundError.js";
-import { ConflictError } from "../errors/conflictError.js";
-import { ValidationError } from "../errors/validationError.js";
+import { NotFoundError } from "../errors/NotfoundError.js";
+import { ConflictError } from "../errors/ConflictError.js";
+import { ValidationError } from "../errors/ValidationError.js";
 
 export const driverService =
 {

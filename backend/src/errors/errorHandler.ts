@@ -1,7 +1,7 @@
 import type { FastifyInstance } from "fastify";
-import { NotFoundError } from "../errors/NotFoundError.js";
-import { ConflictError } from "./conflictError.js";
-import { ValidationError } from "./validationError.js";
+import { NotFoundError } from "./NotfoundError.js";
+import { ConflictError } from "./ConflictError.js";
+import { ValidationError } from "./ValidationError.js";
 
 export function registerErrorHandler(fastify: FastifyInstance) {
     fastify.setErrorHandler((error, request, reply) => {
