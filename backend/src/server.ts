@@ -22,12 +22,26 @@ server.get("/", async (request, response) => {
     status: "ok",
   });
 });
-
+/*
 server.listen({ port: env.port }, (err, address) => {
   if (err) {
     console.error(err);
     process.exit(1);
   }
   console.log(`Server is running on ${address}`);
-});
+});*/
+server.listen(
+  {
+    port: env.port,
+    host: "0.0.0.0",
+  },
+  (err, address) => {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+
+    console.log(`Server is running on ${address}`);
+  }
+);
 
