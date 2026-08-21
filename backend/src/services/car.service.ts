@@ -1,5 +1,5 @@
 import { carModel } from "../models/car.model.js"
-import { NotFoundError } from "../errors/NotfoundError.js";
+import { NotFoundError } from "../errors/NotFoundError.js";
 import { ValidationError } from "../errors/ValidationError.js";
 
 export const carService =
