@@ -1,5 +1,5 @@
 import type { FastifyInstance } from "fastify";
-import { NotFoundError } from "./NotfoundError.js";
+import { NotFoundError } from "./NotFoundError.js";
 import { ConflictError } from "./ConflictError.js";
 import { ValidationError } from "./ValidationError.js";
 

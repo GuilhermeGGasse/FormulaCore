@@ -2,7 +2,7 @@ import { driverModel } from "../models/driver.model.js";
 import { raceModel } from "../models/race.model.js";
 import { resultModel } from "../models/result.model.js"
 import { teamModel } from "../models/team.model.js";
-import { NotFoundError } from "../errors/NotfoundError.js";
+import { NotFoundError } from "../errors/NotFoundError.js";
 import { ConflictError } from "../errors/ConflictError.js";
 import { ValidationError } from "../errors/ValidationError.js";
 
@@ -50,7 +50,7 @@ export const resultService = {
         const resultsperRace = resultModel.findByFilters(raceId);
         return resultsperRace;
     },
-    createResult: async (data: { position: number, points: number, laps: number, status: string, raceId: number, driverId: number, teamId: number }) => {
+    createResult: async (data: { position: number, points: number, laps: number, status: string, raceId: number, driverId: number, teamId: number, carId: number }) => {
         const race = await raceModel.findById(data.raceId);
         if (!race) {
             throw new NotFoundError("race not found.");
